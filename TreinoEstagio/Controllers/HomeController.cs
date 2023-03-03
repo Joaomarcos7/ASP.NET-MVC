@@ -1,30 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc; //bibliotecas padroes de controladores
+using TreinoEstagio.Models;
 
-namespace TreinoEstagio.Controllers
+namespace TreinoEstagio.Controllers //nome do projeto
 {
-    public class HomeController : Controller
+    public class HomeController : Controller //herdando da classe Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() //ActionResult é um tipo de retorno geralmente com o metodo View()!
         {
-            return View();
+            return View(); //como default ela carrega a view que possui o mesmo nome da Action, no caso é Index
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return View("About");
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            ViewBag.Nome = "João Marcos";
 
             return View();
+        }
+
+        public ActionResult Form()
+        {
+            var pessoa = new Pessoa();
+            pessoa.Id = 1;
+            pessoa.Nome = "João";
+            return View(pessoa);
+        }
+
+        [HttpPost]
+        public ActionResult Lista(Pessoa pessoa)
+        {
+            return View(pessoa);
         }
     }
 }
