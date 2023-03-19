@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="codarea" />
+    </Key>
+    <Property Name="codarea" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tarefa">
+    <Key>
+      <PropertyRef Name="codtodo" />
+    </Key>
+    <Property Name="codtodo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="validade" Type="date" />
+    <Property Name="codarea" Type="int" Nullable="false" />
+    <Property Name="obs" Type="text" />
+  </EntityType>
+  <Association Name="FKTarefa">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="codarea" />
+      </Principal>
+      <Dependent Role="Tarefa">
+        <PropertyRef Name="codarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DadosModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tarefa" EntityType="Self.Tarefa" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FKTarefa" Association="Self.FKTarefa">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Tarefa" EntitySet="Tarefa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

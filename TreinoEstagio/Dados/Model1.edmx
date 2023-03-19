@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Funcao1">
+          <Key>
+            <PropertyRef Name="codfuncao" />
+          </Key>
+          <Property Name="codfuncao" Type="int" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="salario" Type="numeric" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="codfuncionario" />
+          </Key>
+          <Property Name="codfuncionario" Type="int" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="datanasc" Type="date" />
+          <Property Name="codfuncao" Type="int" />
+        </EntityType>
+        <Association Name="fkfuncao">
+          <End Role="Funcao1" Type="Self.Funcao1" Multiplicity="0..1" />
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcao1">
+              <PropertyRef Name="codfuncao" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="codfuncao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DadosModelStoreContainer">
+          <EntitySet Name="Funcao1" EntityType="Self.Funcao1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fkfuncao" Association="Self.fkfuncao">
+            <End Role="Funcao1" EntitySet="Funcao1" />
+            <End Role="Funcionario" EntitySet="Funcionario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DadosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Funcao1">
+          <Key>
+            <PropertyRef Name="codfuncao" />
+          </Key>
+          <Property Name="codfuncao" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="salario" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="Funcionario" Relationship="Self.fkfuncao" FromRole="Funcao1" ToRole="Funcionario" />
+        </EntityType>
+        <EntityType Name="Funcionario">
+          <Key>
+            <PropertyRef Name="codfuncionario" />
+          </Key>
+          <Property Name="codfuncionario" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="datanasc" Type="DateTime" Precision="0" />
+          <Property Name="codfuncao" Type="Int32" />
+          <NavigationProperty Name="Funcao1" Relationship="Self.fkfuncao" FromRole="Funcionario" ToRole="Funcao1" />
+        </EntityType>
+        <Association Name="fkfuncao">
+          <End Role="Funcao1" Type="Self.Funcao1" Multiplicity="0..1" />
+          <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Funcao1">
+              <PropertyRef Name="codfuncao" />
+            </Principal>
+            <Dependent Role="Funcionario">
+              <PropertyRef Name="codfuncao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DadosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Funcao1" EntityType="Self.Funcao1" />
+          <EntitySet Name="Funcionario" EntityType="Self.Funcionario" />
+          <AssociationSet Name="fkfuncao" Association="Self.fkfuncao">
+            <End Role="Funcao1" EntitySet="Funcao1" />
+            <End Role="Funcionario" EntitySet="Funcionario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DadosModelStoreContainer" CdmEntityContainer="DadosEntities">
+          <EntitySetMapping Name="Funcao1">
+            <EntityTypeMapping TypeName="DadosModel.Funcao1">
+              <MappingFragment StoreEntitySet="Funcao1">
+                <ScalarProperty Name="codfuncao" ColumnName="codfuncao" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="salario" ColumnName="salario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Funcionario">
+            <EntityTypeMapping TypeName="DadosModel.Funcionario">
+              <MappingFragment StoreEntitySet="Funcionario">
+                <ScalarProperty Name="codfuncionario" ColumnName="codfuncionario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="datanasc" ColumnName="datanasc" />
+                <ScalarProperty Name="codfuncao" ColumnName="codfuncao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

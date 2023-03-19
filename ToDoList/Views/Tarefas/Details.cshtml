@@ -1,0 +1,50 @@
+﻿@model Dados.Tarefa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tarefa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.validade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.validade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.obs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.obs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codtodo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

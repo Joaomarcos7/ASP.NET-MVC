@@ -1,0 +1,42 @@
+﻿@model TreinoEstagio.Dados.Funcionario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Funcionario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datanasc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datanasc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Funcao1.tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Funcao1.tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.codfuncionario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DadosModelStoreContainer" CdmEntityContainer="DadosEntities">
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="DadosModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="codarea" ColumnName="codarea" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tarefa">
+      <EntityTypeMapping TypeName="DadosModel.Tarefa">
+        <MappingFragment StoreEntitySet="Tarefa">
+          <ScalarProperty Name="codtodo" ColumnName="codtodo" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="validade" ColumnName="validade" />
+          <ScalarProperty Name="codarea" ColumnName="codarea" />
+          <ScalarProperty Name="obs" ColumnName="obs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

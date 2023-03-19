@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DadosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="codarea" />
+    </Key>
+    <Property Name="codarea" Type="Int32" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tarefa" Relationship="Self.FKTarefa" FromRole="Area" ToRole="Tarefa" />
+  </EntityType>
+  <EntityType Name="Tarefa">
+    <Key>
+      <PropertyRef Name="codtodo" />
+    </Key>
+    <Property Name="codtodo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="validade" Type="DateTime" Precision="0" />
+    <Property Name="codarea" Type="Int32" Nullable="false" />
+    <Property Name="obs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Area" Relationship="Self.FKTarefa" FromRole="Tarefa" ToRole="Area" />
+  </EntityType>
+  <Association Name="FKTarefa">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="Tarefa" Type="Self.Tarefa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="codarea" />
+      </Principal>
+      <Dependent Role="Tarefa">
+        <PropertyRef Name="codarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DadosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Area" EntityType="Self.Area" />
+    <EntitySet Name="Tarefa" EntityType="Self.Tarefa" />
+    <AssociationSet Name="FKTarefa" Association="Self.FKTarefa">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="Tarefa" EntitySet="Tarefa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

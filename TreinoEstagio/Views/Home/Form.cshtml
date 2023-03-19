@@ -1,0 +1,27 @@
+﻿@model TreinoEstagio.Models.Pessoa
+@{
+    ViewBag.Title = "Form";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Lista", "Home", FormMethod.Post)) ///<form></form>
+{
+
+    @Html.LabelFor(x => x.Nome)
+
+    <div>
+        @Html.EditorFor(x => x.Nome)
+    </div>
+
+    @Html.LabelFor(x => x.Id)
+
+    <div>
+        @Html.EditorFor(x => x.Id)
+    
+    </div>
+
+    <input type="submit">
+
+
+      }

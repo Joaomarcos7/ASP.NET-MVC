@@ -1,0 +1,38 @@
+﻿
+@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@Html.TextBox("Search", null, new { id = "search", type = "search", style = "width:150px;border:2px solid black" })
+
+<button id="btn"> Clique Aqui</button>
+@if (Model == null)
+{
+    <div>Nenhum Tipo</div>
+
+}
+else
+{
+<ul class="test">
+   @foreach (var item in Model)
+   {
+        <li>@item</li>
+   }
+</ul>
+}
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        $("#btn").on("click", function () {
+            let value = $("#search").val().toLowerCase();
+            $.post("/Funcao1/Search", { valor: value }).done(()=>alert("Deu certo!")).fail(()=>alert("errado!"))
+        });
+    });
+
+</script>
+

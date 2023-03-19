@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Dados.Tarefa>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tarefas</h2>
+
+<p>
+<button class="criar">Crie nova tarefa</button>
+</p>
+
+<input id="valor" type="search">
+<button id="query">Consultar por Area</button>
+<div id="tabela">
+@Html.Partial("Tabela",Model)
+</div>
+<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px">
+
+
+  </div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+
+    $(function () {
+        $("#container").hide()
+        $(".criar").on("click", function () {
+            $("#container").show()
+            $.post("Tarefas/Create", (data) => {
+                $("#container").html(data);
+            }).done(() => alert("Success!")).fail(() => alert("Failed!"))
+        });
+
+        $("#query").click(function () {
+            let value = $("#valor").val();
+            $("#tabela").load("Tarefas/Query", { valor: value }, () => alert("Query realizada!"));
+        })
+    })
+</script>

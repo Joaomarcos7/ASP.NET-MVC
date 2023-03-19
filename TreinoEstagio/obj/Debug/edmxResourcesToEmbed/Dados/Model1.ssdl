@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DadosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Funcao1">
+    <Key>
+      <PropertyRef Name="codfuncao" />
+    </Key>
+    <Property Name="codfuncao" Type="int" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="salario" Type="numeric" Precision="15" Scale="2" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="codfuncionario" />
+    </Key>
+    <Property Name="codfuncionario" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="datanasc" Type="date" />
+    <Property Name="codfuncao" Type="int" />
+  </EntityType>
+  <Association Name="fkfuncao">
+    <End Role="Funcao1" Type="Self.Funcao1" Multiplicity="0..1" />
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcao1">
+        <PropertyRef Name="codfuncao" />
+      </Principal>
+      <Dependent Role="Funcionario">
+        <PropertyRef Name="codfuncao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DadosModelStoreContainer">
+    <EntitySet Name="Funcao1" EntityType="Self.Funcao1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fkfuncao" Association="Self.fkfuncao">
+      <End Role="Funcao1" EntitySet="Funcao1" />
+      <End Role="Funcionario" EntitySet="Funcionario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

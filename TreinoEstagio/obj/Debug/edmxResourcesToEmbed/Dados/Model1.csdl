@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DadosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Funcao1">
+    <Key>
+      <PropertyRef Name="codfuncao" />
+    </Key>
+    <Property Name="codfuncao" Type="Int32" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salario" Type="Decimal" Precision="15" Scale="2" />
+    <NavigationProperty Name="Funcionario" Relationship="Self.fkfuncao" FromRole="Funcao1" ToRole="Funcionario" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="codfuncionario" />
+    </Key>
+    <Property Name="codfuncionario" Type="Int32" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="datanasc" Type="DateTime" Precision="0" />
+    <Property Name="codfuncao" Type="Int32" />
+    <NavigationProperty Name="Funcao1" Relationship="Self.fkfuncao" FromRole="Funcionario" ToRole="Funcao1" />
+  </EntityType>
+  <Association Name="fkfuncao">
+    <End Role="Funcao1" Type="Self.Funcao1" Multiplicity="0..1" />
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcao1">
+        <PropertyRef Name="codfuncao" />
+      </Principal>
+      <Dependent Role="Funcionario">
+        <PropertyRef Name="codfuncao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DadosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Funcao1" EntityType="Self.Funcao1" />
+    <EntitySet Name="Funcionario" EntityType="Self.Funcionario" />
+    <AssociationSet Name="fkfuncao" Association="Self.fkfuncao">
+      <End Role="Funcao1" EntitySet="Funcao1" />
+      <End Role="Funcionario" EntitySet="Funcionario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DadosModelStoreContainer" CdmEntityContainer="DadosEntities">
+    <EntitySetMapping Name="Funcao1">
+      <EntityTypeMapping TypeName="DadosModel.Funcao1">
+        <MappingFragment StoreEntitySet="Funcao1">
+          <ScalarProperty Name="codfuncao" ColumnName="codfuncao" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="salario" ColumnName="salario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funcionario">
+      <EntityTypeMapping TypeName="DadosModel.Funcionario">
+        <MappingFragment StoreEntitySet="Funcionario">
+          <ScalarProperty Name="codfuncionario" ColumnName="codfuncionario" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="datanasc" ColumnName="datanasc" />
+          <ScalarProperty Name="codfuncao" ColumnName="codfuncao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
