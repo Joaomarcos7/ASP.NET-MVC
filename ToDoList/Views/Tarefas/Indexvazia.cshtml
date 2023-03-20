@@ -10,7 +10,7 @@
 
 <button id="criar" class="btn-default criar">Criar Tarefa</button>
 
-<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px">
+<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px;display:none;">
     
   
   </div>
@@ -19,9 +19,8 @@
 <script>
 
     $(function () {
-      $("#container").hide()
         $("#criar").on("click", function () {
-            $("#container").show()
+            $("#container").css("display", "block");
             $.post("Tarefas/Create", (data) => {
                 $("#container").html(data);
             }).done(() =>alert("Success!")).fail(()=>alert("Failed!"))

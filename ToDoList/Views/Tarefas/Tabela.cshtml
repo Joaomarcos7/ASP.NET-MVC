@@ -4,7 +4,10 @@
     Layout = null;
 }
 
-
+@foreach (var area in Model.Select(m => m.Area.nome).Distinct())
+{
+    <h3 style="font-weight:bold;">@area</h3>
+    <div style="width:100%;border:1px solid black;height:0px"></div>
 <table class="table">
     <tr>
         <th>
@@ -22,20 +25,20 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(m=>m.Area.nome==@area))
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.titulo)
+                @Html.DisplayFor(model => item.titulo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.validade)
+                @Html.DisplayFor(model=> item.validade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.obs)
+                @Html.DisplayFor(model=> item.obs)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Area.nome)
+                @Html.DisplayFor(model => item.Area.nome)
             </td>
             <td>
                <input class="editbtn" type="button" name="@item.codtodo" value="Editar"/>
@@ -43,14 +46,15 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.codtodo })
             </td>
         </tr>
-        
+
     }
 
 </table>
+}
 
 <div id="containeredit" style="display:none;background-color:white;border:1px solid black;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:550px;height:500px;padding-left:5px;">
     
-    </div>
+</div>
 
 
 @Scripts.Render("~/bundles/jquery")
