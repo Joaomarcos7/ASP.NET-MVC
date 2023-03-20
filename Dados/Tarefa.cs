@@ -11,14 +11,12 @@ namespace Dados
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Tarefa
     {
         public int codtodo { get; set; }
         public string titulo { get; set; }
         public Nullable<System.DateTime> validade { get; set; }
-        [Display(Name ="Área")]
         public int codarea { get; set; }
         public string obs { get; set; }
     

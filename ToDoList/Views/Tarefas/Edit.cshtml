@@ -2,11 +2,11 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = null;
 }
+    <h2>Edit</h2>
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Update","Tarefas",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     
@@ -59,3 +59,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+
+ 
+   
+</script>

@@ -38,11 +38,32 @@
                 @Html.DisplayFor(modelItem => item.Area.nome)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.codtodo }) |
+               <input class="editbtn" type="button" name="@item.codtodo" value="Editar"/>
                 @Html.ActionLink("Details", "Details", new { id = item.codtodo }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.codtodo })
             </td>
         </tr>
+        
     }
 
 </table>
+
+<div id="containeredit" style="display:none;background-color:white;border:1px solid black;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:550px;height:500px;padding-left:5px;">
+    
+    </div>
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(function () {
+        $(".editbtn").click((event) => {
+            let ID = event.target.name;
+            $("#containeredit").css("display", "block")
+            $.post("Tarefas/Edit", { id: parseInt(ID) }, function (data) {
+                $("#containeredit").html(data);
+            }).done(()=>alert("Success!!")).fail(()=>alert("Failed!!"))
+        })
+
+    })
+ </script>

@@ -69,6 +69,7 @@ namespace ToDoList.Controllers
         }
 
         // GET: Tarefas/Edit/5
+        [HttpPost]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,7 +82,7 @@ namespace ToDoList.Controllers
                 return HttpNotFound();
             }
             ViewBag.codarea = new SelectList(db.Area, "codarea", "nome", tarefa.codarea);
-            return View(tarefa);
+            return View("Edit",tarefa);
         }
 
         // POST: Tarefas/Edit/5
@@ -89,7 +90,7 @@ namespace ToDoList.Controllers
         // obter mais detalhes, veja https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "codtodo,titulo,validade,codarea,obs")] Tarefa tarefa)
+        public ActionResult Update([Bind(Include = "codtodo,titulo,validade,codarea,obs")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +99,7 @@ namespace ToDoList.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.codarea = new SelectList(db.Area, "codarea", "nome", tarefa.codarea);
-            return View(tarefa);
+            return PartialView("Edit",tarefa);
         }
 
         // GET: Tarefas/Delete/5
