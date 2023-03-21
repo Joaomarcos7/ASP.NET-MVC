@@ -10,7 +10,7 @@
 
 <button id="criar" class="btn-default criar">Criar Tarefa</button>
 
-<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px;display:none;">
+<div id="container" style="background-color: white; border: 1px solid black; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); height: 550px; width: 550px; display: none; transition: display 2s ease-in-out">
     
   
   </div>
@@ -23,7 +23,7 @@
             $("#container").css("display", "block");
             $.post("Tarefas/Create", (data) => {
                 $("#container").html(data);
-            }).done(() =>alert("Success!")).fail(()=>alert("Failed!"))
+            });
         });
-    });
+    })
 </script>

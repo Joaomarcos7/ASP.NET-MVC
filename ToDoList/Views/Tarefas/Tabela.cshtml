@@ -64,7 +64,7 @@
         $(".editbtn").click((event) => {
             let ID = event.target.name;
             $("#containeredit").css("display", "block")
-            $.post("Tarefas/Edit", { id: parseInt(ID) }, function (data) {
+            $.post("Edit", { id: parseInt(ID) }, function (data) {
                 $("#containeredit").html(data);
             }).done(()=>alert("Success!!")).fail(()=>alert("Failed!!"))
         })

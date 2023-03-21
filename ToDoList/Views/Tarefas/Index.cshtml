@@ -4,35 +4,63 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tarefas</h2>
+<h2>To-do List</h2>
 
 <p>
 <button class="criar">Crie nova tarefa</button>
 </p>
 
-<input id="valor" type="search">
-<button id="query">Consultar por Area</button>
+<input id="valor" type="search" placeholder="Pesquise aqui..." style="height:35px;width:200px;border-radius:5px;">
+<button id="query" style="background-color:black;color:white;">Filtrar por Área</button>
 <div id="tabela">
 @Html.Partial("Tabela",Model)
 </div>
-<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px;display:none;">
+<div id="container" style="background-color:white;border:1px solid black;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:550px;width:550px;display:none;transition:display 2s ease-in-out ">
 
   </div>
-
 @Scripts.Render("~/bundles/jquery")
 <script>
 
     $(function () {
         $(".criar").on("click", function () {
             $("#container").css("display","block")
-            $.post("Tarefas/Create", (data) => {
+            $.post("Create", (data) => {
                 $("#container").html(data);
             }).done(() => alert("Success!")).fail(() => alert("Failed!"))
         });
 
+        $("#valor").focus(() => {
+            $("#valor").css({
+                "border": "2px solid",
+                "background-color": "blue",
+                "color":"white"
+            });
+        })
+
+
+        $("#valor").blur(() => {
+            $("#valor").css({"background-color" :"white","color":"black"});
+        })
+
+        $("#query").on(
+            {
+
+                "mouseover": () => {
+                    $("#query").css("transform", "scale(1.1)")
+                }
+                ,
+                "mouseout": () => {
+                    $("#query").css("transform", "scale(1)")
+
+                }
+            }
+        )
+
+    
+
         $("#query").click(function () {
             let value = $("#valor").val();
-            $("#tabela").load("Tarefas/Query", { valor: value }, () => alert("Query realizada!"));
+            $("#tabela").load("Query", { valor: value }, () => alert("Query realizada!"));
         })
     })
 </script>
